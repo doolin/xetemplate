@@ -1,0 +1,210 @@
+\documentclass{article}
+
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{physics}
+\usepackage[barr,pdf]{xy}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{comment}
+
+\usepackage{amsthm}
+\usepackage[capitalize]{cleveref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{exercise}[theorem]{Exercise}
+
+\title{This is your title}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Linear maps}
+
+A linear map $T$ transform elements of linear spaces guaranteeing
+the following:
+
+\begin{equation}
+  \label{eq:linear-map}
+  T(\alpha x + \beta y) = \alpha T(x) + \beta T(y).
+\end{equation}
+
+%% TODO: add an exercise in R^1 here.
+
+It seems simple, and it is, yet that simplicity forms the
+basis of most scientific computing, and a large amount of
+general and business computing as well. Dig deep enough into
+any sufficiently useful software, there are vector space
+operations lurking somewhere.
+
+To each linear map $T$ we may associate a matrix $\mathcal{M}(T)$;
+your Daddy's matrix math follows.
+
+
+\section{Bases}
+
+We now return to coordinates, ordered tuples of which define vectors.
+A vector may have 1, 2 or infinitely many coordinates, but we will confine
+our investigation to vectors of finite (e.g., $n$) numbers of coordinates.
+As a recap, and because it hasn't yet been made explicit, a brief review
+of vector addition and scalar multiplication is in order.
+
+\paragraph{Scalar multiplication} For some scalar $a$ in the field
+over which the vector space is constructed, for some $v \in V$,
+$av\in V$. For example, suppose $a = 2$ and $v' = [3, 4]$. Then
+$av' = [6, 8]$.
+
+\marginpar{We can't completely avoid your daddy's matrix math.}
+
+\paragraph{Vector addition} By defintion, for vector $x, y \in V$,
+$w = x + y \in V$. For example, take $F\equiv\mathbb{R}$. For
+$x = [2, 3]'$ and $y = [4, 1]'$,
+
+\begin{align}
+  w &= \begin{bmatrix}6\\
+             4\end{bmatrix} =
+\begin{bmatrix}2\\
+             3\end{bmatrix} +
+\begin{bmatrix}4\\
+             1\end{bmatrix}.
+\end{align}
+
+We're now equipped to investigate the fundamental operation
+of a linear algebra, the linear combination.
+
+\subsection{Linear combinations}
+
+Suppose a linear space $V$ with elements $v, w \in V$ over some field
+with members $a, b, c$, etc.
+By definition~\ref{def:linear-space}, vectors may be composed of
+\textit{linear combinations} of other vectors:
+
+\begin{equation}
+  w = a_1v_1 + \cdots + a_nv_n.
+\end{equation}
+
+\begin{comment}
+  Primary concern here is establishing the equivalence between
+  the number of linearly independent basis vectors and the dimension
+  of the vector space.
+\end{comment}
+
+\begin{comment}
+  From Wikipedia on Operads:
+  \begin{quote}
+    This point of view formalizes the
+    notion that linear combinations are the most general sort of operation on a
+    vector space – saying that a vector space is an algebra over the operad of
+    linear combinations is precisely the statement that all possible algebraic
+    operations in a vector space are linear combinations. The basic operations
+    of vector addition and scalar multiplication are a generating set for the
+    operad of all linear combinations, while the linear combinations operad
+    canonically encodes all possible operations on a vector space.
+  \end{quote}
+
+\end{comment}
+
+\subsection{Linear independence}
+
+Suppose we have some linear combination of $v_1, v_2,\ldots, v_n$
+for $i = 1..n, v_i \neq 0$ such that
+
+\begin{equation}
+  \label{eq:linear-independence}
+  \alpha v_1 + \beta v_2 + \cdots + \omega v_n = 0.
+\end{equation}
+
+When Eq.~\ref{eq:linear-independence} implies $\alpha = \beta = \cdots = \omega = 0$, then
+the vectors $v_1, v_2,\ldots, v_n$ are \textit{linearly independent}, by definition.
+This means none of these vectors may be written as a linear combination of
+the other vectors. Conversely, suppose one of the coefficients, e. g., $\alpha \neq 0$.
+Then we can rewrite $v_1$ in terms of $v_2,\ldots, v_n$ as follows:
+
+\[ % begin{equation}
+  \alpha v_1 = -\beta v_2 - \cdots - \omega v_n,
+\] % end{equation}
+or
+\begin{equation}
+  \label{eq:linear-dependence}
+  v_1 = \frac{-\beta}{\alpha}v_2 + \cdots + \frac{-\omega}{\alpha}v_n.
+\end{equation}
+From Eq.~\ref{eq:linear-dependence}, we say that the vectors $v_1, v_2,\ldots, v_n$
+are \textit{linearly dependent}.
+
+Linear independence leads naturally to the notion of \textit{span}, as discussed next.
+
+
+\appendix
+
+\section{Notation}
+
+Notation is important as done well it helps increase understanding and
+facilitate communication, while done poorly promotes confusion and
+misunderstanding.  Notation for linear or vector space elements and operations
+follows a range of conventions. After some exposure, notation ceases to be a
+stumbling block, but it can be confusing for newcomers to the literature.
+
+\subsection{bra--ket notation}
+
+Dirac's ``bra--ket'' notation is standard in quantum mechanics, and looks
+more intimidating than it really is. When the notation was developed, had
+the distinct advantage of being very easy to type (on an actual, manual
+typewriter), while being unambiguous.
+
+\begin{align}
+  \ket{x} &= \begin{bmatrix}
+   x_{1} \\
+   x_{2} \\
+    \vdots \\
+    x_{m}
+  \end{bmatrix},
+\end{align}
+
+and
+\begin{equation}
+  \bra{x} = x^* = [x_1^*, x_2^*, \ldots, x_m^*].
+\end{equation}
+
+The notation $y^*$ indicates the hermitian conjugate; for our
+purposes this is simply the complex conjugate of each coordinate
+of $y$.
+
+We care about this because we are learn it alls and this notation
+appears in the quantum computing literature.
+
+\begin{quote}
+  In mathematical theories the question of notation, while not of primary
+  importance, is yet worthy of careful consideration, since a good notation can
+  be of great value in helping the development of a theory, by making it easy
+  to write down those quantities or combinations of quantities that are
+  important, and difficult or impossible to write down those that are
+  unimportant. The summation convention in tensor analysis is an example,
+  illustrating how specially appropriate a notation can be.\cite{dirac_1939}
+\end{quote}
+
+Very nice indeed: Dirac threw out the matrices.
+
+
+\vspace{0.5in}
+
+\hrule
+
+$$
+\bfig
+\morphism[A`B;f]
+\Loop(0,0)A(ur,ul)_g
+\Loop(500,0)B(dl,dr)_h
+\efig
+$$
+
+%\bibliography{math,text,dirac}{}
+\bibliography{dirac}{}
+\bibliographystyle{plain}
+
+\end{document}
